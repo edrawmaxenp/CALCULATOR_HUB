@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ElectroCalc Hub</title>
+  <meta name="description" content="Electronics calculator website for students and engineers: Ohm's law, resistor color code, transistor and LED resistor design, zener and linear regulator design, RC time constant, reactance, and voltage divider.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="site-nav__inner">
+      <a class="site-link is-active" href="index.html">Home</a>
+      <a class="site-link" href="about.html">About</a>
+      <a class="site-link" href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <a class="creator-logo" href="index.html" aria-label="TMSentroniX home">
+      <span class="logo-badge" aria-hidden="true">TX</span>
+      <span class="logo-text"><span class="logo-tms">TMS</span><span class="logo-ent">entroniX</span></span>
+    </a>
+    <div class="hero__inner">
+      <p class="eyebrow">Electronics Toolkit</p>
+      <h1>ElectroCalc Hub</h1>
+      <p class="hero__text">
+        Practical calculators for electronics students and engineers.
+        Fast, accurate, and built for lab work and circuit design.
+      </p>
+    </div>
+  </header>
+
+  <nav class="app-tabs" aria-label="Main tools">
+    <button class="tab-btn is-active" type="button" data-tab-target="general-panel">Core Calculators</button>
+    <button class="tab-btn" type="button" data-tab-target="dcdc-panel">DC-DC Converter Designer</button>
+    <button class="tab-btn" type="button" data-tab-target="study-panel">Study Materials</button>
+  </nav>
+
+  <section class="panel is-active" id="general-panel">
+    <main class="grid" id="calculators">
+      <section class="card">
+        <h2 class="calc-title">
+          <span class="calc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2L5 14h6l-1 8 9-13h-6l1-7z"></path>
+            </svg>
+          </span>
+          Ohm's Law
+        </h2>
+        <p>Find the missing variable using V = I x R.</p>
+        <div class="form-row">
+          <label for="ohm-voltage">Voltage (V)</label>
+          <input id="ohm-voltage" type="number" step="any" placeholder="e.g. 12">
+        </div>
+        <div class="form-row">
+          <label for="ohm-current">Current (A)</label>
+          <input id="ohm-current" type="number" step="any" placeholder="e.g. 0.5">
+        </div>
+        <div class="form-row">
+          <label for="ohm-resistance">Resistance (ohms)</label>
+          <input id="ohm-resistance" type="number" step="any" placeholder="e.g. 24">
+        </div>
+        <button data-action="ohms" type="button">Calculate</button>
+        <p class="result" id="ohm-result"></p>
+      </section>
+
+      <section class="card">
+        <h2 class="calc-title">
+          <span class="calc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 6h6l2 3 2-3h6"></path>
+              <path d="M9 9v9"></path>
+              <path d="M15 9v9"></path>
+              <path d="M6 18h12"></path>
+            </svg>
+          </span>
+          Voltage Divider
+        </h2>
+        <p>Compute Vout from Vin, R1, and R2.</p>
+        <div class="form-row">
+          <label for="vd-vin">Vin (V)</label>
+          <input id="vd-vin" type="number" step="any" placeholder="e.g. 9">
+        </div>
+        <div class="form-row">
+          <label for="vd-r1">R1 (ohms)</label>
+          <input id="vd-r1" type="number" step="any" placeholder="e.g. 10000">
+        </div>
+        <div class="form-row">
+          <label for="vd-r2">R2 (ohms)</label>
+          <input id="vd-r2" type="number" step="any" placeholder="e.g. 2200">
+        </div>
+        <button data-action="divider" type="button">Calculate</button>
+        <p class="result" id="vd-result"></p>
+      </section>
+
+      <section class="card">
+        <h2 class="calc-title">
+          <span class="calc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 12h4"></path>
+              <path d="M11 8v8l6-4z"></path>
+              <path d="M18 8v8"></path>
+              <path d="M6 8l-2 2"></path>
+              <path d="M6 16l-2-2"></path>
+            </svg>
+          </span>
+          LED Series Resistor
+        </h2>
+        <p>Find the current-limiting resistor for your LED.</p>
+        <div class="form-row">
+          <label for="led-vsupply">Supply Voltage (V)</label>
+          <input id="led-vsupply" type="number" step="any" placeholder="e.g. 5">
+        </div>
+        <div class="form-row">
+          <label for="led-vf">LED Forward Voltage (Vf)</label>
+          <input id="led-vf" type="number" step="any" placeholder="e.g. 2.1">
+        </div>
+        <div class="form-row">
+          <label for="led-current">LED Current (mA)</label>
+          <input id="led-current" type="number" step="any" placeholder="e.g. 15">
+        </div>
+        <button data-action="led" type="button">Calculate</button>
+        <p class="result" id="led-result"></p>
+      </section>
+
+      <section class="card">
+        <h2 class="calc-title">
+          <span class="calc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12h4l2-4 4 8 2-4h6"></path>
+              <path d="M4 6h4"></path>
+              <path d="M4 18h4"></path>
+            </svg>
+          </span>
+          RC Time Constant
+        </h2>
+        <p>Calculate tau = R x C for filters and timing circuits.</p>
+        <div class="form-row">
+          <label for="rc-r">Resistance (ohms)</label>
+          <input id="rc-r" type="number" step="any" placeholder="e.g. 1000">
+        </div>
+        <div class="form-row">
+          <label for="rc-c">Capacitance (uF)</label>
+          <input id="rc-c" type="number" step="any" placeholder="e.g. 47">
+        </div>
+        <button data-action="rc" type="button">Calculate</button>
+        <p class="result" id="rc-result"></p>
+      </section>
+
+      <section class="card">
+        <h2 class="calc-title">
+          <span class="calc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 12c2.5-6 5.5-6 8 0s5.5 6 8 0 3.5-6 4-6"></path>
+            </svg>
+          </span>
+          Reactance
+        </h2>
+        <p>Find capacitive or inductive reactance at a frequency.</p>
+        <div class="form-row">
+          <label for="x-type">Type</label>
+          <select id="x-type">
+            <option value="capacitive">Capacitive (Xc)</option>
+            <option value="inductive">Inductive (Xl)</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="x-freq">Frequency (Hz)</label>
+          <input id="x-freq" type="number" step="any" placeholder="e.g. 1000">
+        </div>
+        <div class="form-row">
+          <label for="x-value">Component Value (uF for C, mH for L)</label>
+          <input id="x-value" type="number" step="any" placeholder="e.g. 0.1">
+        </div>
+        <button data-action="reactance" type="button">Calculate</button>
+        <p class="result" id="x-result"></p>
+      </section>
+
+      <section class="card">
+        <h2 class="calc-title">
+          <span class="calc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 12h3"></path>
+              <path d="M19 12h3"></path>
+              <rect x="5" y="8" width="14" height="8" rx="2"></rect>
+              <path d="M9 8v8"></path>
+              <path d="M12 8v8"></path>
+              <path d="M15 8v8"></path>
+            </svg>
+          </span>
+          Resistor Color Code
+        </h2>
+        <p>Select 4-band, 5-band, or 6-band and choose band colors directly.</p>
+        <div class="form-row">
+          <label for="r-mode">Band Configuration</label>
+          <select id="r-mode" class="resistor-select">
+            <option value="4">4-Band</option>
+            <option value="5">5-Band</option>
+            <option value="6">6-Band</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="r-band1">Band 1 (Digit)</label>
+          <select id="r-band1" class="resistor-select"></select>
+        </div>
+        <div class="form-row">
+          <label for="r-band2">Band 2 (Digit)</label>
+          <select id="r-band2" class="resistor-select"></select>
+        </div>
+        <div class="form-row resistor-extra" id="r-band3-row">
+          <label for="r-band3">Band 3 (Digit)</label>
+          <select id="r-band3" class="resistor-select"></select>
+        </div>
+        <div class="form-row">
+          <label for="r-mult">Multiplier Band</label>
+          <select id="r-mult" class="resistor-select"></select>
+        </div>
+        <div class="form-row">
+          <label for="r-tol">Tolerance Band</label>
+          <select id="r-tol" class="resistor-select"></select>
+        </div>
+        <div class="form-row resistor-extra" id="r-tempco-row">
+          <label for="r-tempco">Band 6 (Tempco, ppm/degC)</label>
+          <select id="r-tempco" class="resistor-select"></select>
+        </div>
+        <div class="resistor-preview" aria-hidden="true">
+          <span class="resistor-lead"></span>
+          <span class="resistor-body" id="r-body-bands"></span>
+          <span class="resistor-lead"></span>
+        </div>
+        <button data-action="resistor" type="button">Decode</button>
+        <p class="result" id="r-result"></p>
+      </section>
+
+      <section class="card">
+        <h2 class="calc-title">
+          <span class="calc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="7" cy="7" r="2"></circle>
+              <circle cx="17" cy="7" r="2"></circle>
+              <circle cx="12" cy="17" r="2"></circle>
+              <path d="M8.5 8.5l2.2 6"></path>
+              <path d="M15.5 8.5l-2.2 6"></path>
+              <path d="M9 7h6"></path>
+            </svg>
+          </span>
+          Transistor Base Resistor
+        </h2>
+        <p>Size base resistor for BJT switching using forced beta design.</p>
+        <div class="form-row">
+          <label for="tr-vdrive">Drive Voltage (V)</label>
+          <input id="tr-vdrive" type="number" step="any" placeholder="e.g. 5">
+        </div>
+        <div class="form-row">
+          <label for="tr-vbe">Vbe (V)</label>
+          <input id="tr-vbe" type="number" step="any" value="0.7">
+        </div>
+        <div class="form-row">
+          <label for="tr-ic">Collector Current (mA)</label>
+          <input id="tr-ic" type="number" step="any" placeholder="e.g. 100">
+        </div>
+        <div class="form-row">
+          <label for="tr-beta">Forced Beta</label>
+          <input id="tr-beta" type="number" step="any" value="10">
+        </div>
+        <button data-action="transistor" type="button">Calculate</button>
+        <p class="result" id="tr-result"></p>
+      </section>
+
+      <section class="card">
+        <h2 class="calc-title">
+          <span class="calc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="4" width="16" height="16" rx="3"></rect>
+              <path d="M8 8h8"></path>
+              <path d="M8 12h8"></path>
+              <path d="M8 16h5"></path>
+            </svg>
+          </span>
+          Linear Regulator Design
+        </h2>
+        <p>Estimate dropout margin, dissipation, efficiency, and thermal requirement.</p>
+        <div class="form-row">
+          <label for="lreg-vin">Input Voltage (V)</label>
+          <input id="lreg-vin" type="number" step="any" placeholder="e.g. 12">
+        </div>
+        <div class="form-row">
+          <label for="lreg-vout">Output Voltage (V)</label>
+          <input id="lreg-vout" type="number" step="any" placeholder="e.g. 5">
+        </div>
+        <div class="form-row">
+          <label for="lreg-iout">Output Current (mA)</label>
+          <input id="lreg-iout" type="number" step="any" placeholder="e.g. 500">
+        </div>
+        <div class="form-row">
+          <label for="lreg-drop">Dropout Requirement (V)</label>
+          <input id="lreg-drop" type="number" step="any" value="2">
+        </div>
+        <div class="form-row">
+          <label for="lreg-ta">Ambient Temp (degC)</label>
+          <input id="lreg-ta" type="number" step="any" value="40">
+        </div>
+        <div class="form-row">
+          <label for="lreg-tj">Max Junction Temp (degC)</label>
+          <input id="lreg-tj" type="number" step="any" value="125">
+        </div>
+        <button data-action="lreg" type="button">Calculate</button>
+        <p class="result" id="lreg-result"></p>
+      </section>
+
+      <section class="card">
+        <h2 class="calc-title">
+          <span class="calc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12h4"></path>
+              <path d="M7 9l3 3-3 3"></path>
+              <path d="M10 12h5"></path>
+              <path d="M15 9v6"></path>
+              <path d="M18 8v8"></path>
+              <path d="M21 8v8"></path>
+            </svg>
+          </span>
+          Zener Regulator
+        </h2>
+        <p>Compute series resistor and zener stress for a basic shunt regulator.</p>
+        <div class="form-row">
+          <label for="z-vin">Input Voltage (V)</label>
+          <input id="z-vin" type="number" step="any" placeholder="e.g. 15">
+        </div>
+        <div class="form-row">
+          <label for="z-vz">Zener Voltage (V)</label>
+          <input id="z-vz" type="number" step="any" placeholder="e.g. 5.1">
+        </div>
+        <div class="form-row">
+          <label for="z-iload">Load Current (mA)</label>
+          <input id="z-iload" type="number" step="any" placeholder="e.g. 40">
+        </div>
+        <div class="form-row">
+          <label for="z-izmin">Minimum Zener Current (mA)</label>
+          <input id="z-izmin" type="number" step="any" value="5">
+        </div>
+        <div class="form-row">
+          <label for="z-izmax">Maximum Zener Current (mA)</label>
+          <input id="z-izmax" type="number" step="any" value="50">
+        </div>
+        <button data-action="zener" type="button">Calculate</button>
+        <p class="result" id="z-result"></p>
+      </section>
+
+      <section class="card">
+        <h2 class="calc-title">
+          <span class="calc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12h4"></path>
+              <path d="M8 8v8l5-4-5-4z"></path>
+              <path d="M15 7v10"></path>
+              <path d="M17 8l3-3"></path>
+              <path d="M17 16l3 3"></path>
+            </svg>
+          </span>
+          LED String Resistor
+        </h2>
+        <p>Calculate resistor for multiple LEDs connected in one series string.</p>
+        <div class="form-row">
+          <label for="leds-vs">Supply Voltage (V)</label>
+          <input id="leds-vs" type="number" step="any" placeholder="e.g. 12">
+        </div>
+        <div class="form-row">
+          <label for="leds-vf">LED Forward Voltage Each (V)</label>
+          <input id="leds-vf" type="number" step="any" placeholder="e.g. 2.1">
+        </div>
+        <div class="form-row">
+          <label for="leds-count">LEDs in Series</label>
+          <input id="leds-count" type="number" step="1" value="3">
+        </div>
+        <div class="form-row">
+          <label for="leds-current">String Current (mA)</label>
+          <input id="leds-current" type="number" step="any" placeholder="e.g. 20">
+        </div>
+        <button data-action="led-string" type="button">Calculate</button>
+        <p class="result" id="leds-result"></p>
+      </section>
+    </main>
+  </section>
+
+  <section class="panel" id="dcdc-panel">
+    <div class="dcdc-shell">
+      <section class="card dcdc-intro">
+        <h2 class="calc-title">
+          <span class="calc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="5" width="14" height="14" rx="3"></rect>
+              <path d="M9 2v3"></path>
+              <path d="M15 2v3"></path>
+              <path d="M9 19v3"></path>
+              <path d="M15 19v3"></path>
+              <path d="M2 9h3"></path>
+              <path d="M2 15h3"></path>
+              <path d="M19 9h3"></path>
+              <path d="M19 15h3"></path>
+            </svg>
+          </span>
+          DC-DC Converter Design Studio
+        </h2>
+        <p>
+          Build quick design estimates for Buck, Boost, and Buck-Boost topologies.
+          Each converter tab includes power component sizing and magnetics selection,
+          with one-click PDF report export.
+        </p>
+      </section>
+
+      <div class="subtabs" aria-label="DC-DC topologies">
+        <button class="subtab-btn is-active" type="button" data-topology-target="topology-buck">Buck</button>
+        <button class="subtab-btn" type="button" data-topology-target="topology-boost">Boost</button>
+        <button class="subtab-btn" type="button" data-topology-target="topology-buckboost">Buck-Boost</button>
+      </div>
+
+      <section class="dcdc-topology is-active" id="topology-buck">
+        <article class="card dcdc-card">
+          <h2 class="calc-title">
+            <span class="calc-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 7h16"></path>
+                <path d="M12 7v10"></path>
+                <path d="M8 13l4 4 4-4"></path>
+              </svg>
+            </span>
+            Buck Converter (Step-Down)
+          </h2>
+          <p>Design for lowering DC voltage with inductor, switch, diode, and output capacitor sizing.</p>
+          <div class="dcdc-grid">
+            <div class="form-row">
+              <label for="buck-vin-min">Vin Min (V)</label>
+              <input id="buck-vin-min" type="number" step="any" value="18">
+            </div>
+            <div class="form-row">
+              <label for="buck-vin-max">Vin Max (V)</label>
+              <input id="buck-vin-max" type="number" step="any" value="36">
+            </div>
+            <div class="form-row">
+              <label for="buck-vout">Vout (V)</label>
+              <input id="buck-vout" type="number" step="any" value="12">
+            </div>
+            <div class="form-row">
+              <label for="buck-iout">Iout (A)</label>
+              <input id="buck-iout" type="number" step="any" value="5">
+            </div>
+            <div class="form-row">
+              <label for="buck-fsw">Switching Frequency (kHz)</label>
+              <input id="buck-fsw" type="number" step="any" value="150">
+            </div>
+            <div class="form-row">
+              <label for="buck-ripple">Inductor Ripple (%)</label>
+              <input id="buck-ripple" type="number" step="any" value="30">
+            </div>
+            <div class="form-row">
+              <label for="buck-vripple">Output Ripple (%)</label>
+              <input id="buck-vripple" type="number" step="any" value="1">
+            </div>
+            <div class="form-row">
+              <label for="buck-eff">Efficiency (%)</label>
+              <input id="buck-eff" type="number" step="any" value="92">
+            </div>
+            <div class="form-row">
+              <label for="buck-ae">Core Ae (mm^2)</label>
+              <input id="buck-ae" type="number" step="any" value="90">
+            </div>
+            <div class="form-row">
+              <label for="buck-bmax">Bmax (T)</label>
+              <input id="buck-bmax" type="number" step="any" value="0.22">
+            </div>
+            <div class="form-row">
+              <label for="buck-j">Current Density J (A/mm^2)</label>
+              <input id="buck-j" type="number" step="any" value="4">
+            </div>
+            <section class="mosfet-group dcdc-span-all" aria-label="Buck top MOSFET parameters">
+              <h3>Top MOSFET Parameters (High-Side)</h3>
+              <div class="dcdc-grid dcdc-grid--nested">
+                <div class="form-row">
+                  <label for="buck-hs-rdson">Top MOSFET Rds(on) (mohm)</label>
+                  <input id="buck-hs-rdson" type="number" step="any" value="18">
+                </div>
+                <div class="form-row">
+                  <label for="buck-hs-qg">Top MOSFET Total Qg (nC)</label>
+                  <input id="buck-hs-qg" type="number" step="any" value="35">
+                </div>
+                <div class="form-row">
+                  <label for="buck-hs-trtf">Top MOSFET tr + tf (ns)</label>
+                  <input id="buck-hs-trtf" type="number" step="any" value="45">
+                </div>
+                <div class="form-row">
+                  <label for="buck-hs-vgate">Top Gate Drive Vgs (V)</label>
+                  <input id="buck-hs-vgate" type="number" step="any" value="10">
+                </div>
+              </div>
+            </section>
+            <section class="mosfet-group dcdc-span-all" aria-label="Buck bottom MOSFET parameters">
+              <h3>Bottom MOSFET Parameters (Low-Side)</h3>
+              <div class="dcdc-grid dcdc-grid--nested">
+                <div class="form-row">
+                  <label for="buck-ls-rdson">Bottom MOSFET Rds(on) (mohm)</label>
+                  <input id="buck-ls-rdson" type="number" step="any" value="8">
+                </div>
+                <div class="form-row">
+                  <label for="buck-ls-qg">Bottom MOSFET Total Qg (nC)</label>
+                  <input id="buck-ls-qg" type="number" step="any" value="52">
+                </div>
+                <div class="form-row">
+                  <label for="buck-ls-trtf">Bottom MOSFET tr + tf (ns)</label>
+                  <input id="buck-ls-trtf" type="number" step="any" value="30">
+                </div>
+                <div class="form-row">
+                  <label for="buck-ls-vgate">Bottom Gate Drive Vgs (V)</label>
+                  <input id="buck-ls-vgate" type="number" step="any" value="10">
+                </div>
+              </div>
+            </section>
+            <div class="form-row">
+              <label for="buck-ta">Ambient Temp (degC)</label>
+              <input id="buck-ta" type="number" step="any" value="40">
+            </div>
+            <div class="form-row">
+              <label for="buck-tjmax">Max Junction Temp (degC)</label>
+              <input id="buck-tjmax" type="number" step="any" value="125">
+            </div>
+            <div class="form-row">
+              <label for="buck-rthjc">RthJC (degC/W)</label>
+              <input id="buck-rthjc" type="number" step="any" value="2">
+            </div>
+            <div class="form-row">
+              <label for="buck-rthcs">RthCS (degC/W)</label>
+              <input id="buck-rthcs" type="number" step="any" value="0.5">
+            </div>
+          </div>
+          <div class="action-row">
+            <button data-action="dcdc-calc" data-topology="buck" type="button">Calculate Buck Design</button>
+            <button class="secondary-btn" data-action="dcdc-pdf" data-topology="buck" type="button">Download Buck PDF</button>
+          </div>
+          <div class="result-panel">
+            <h3>Power Component Selection</h3>
+            <p class="result" id="buck-power-result"></p>
+          </div>
+          <div class="result-panel">
+            <h3>Magnetics Selection</h3>
+            <p class="result" id="buck-mag-result"></p>
+          </div>
+          <div class="result-panel">
+            <h3>MOSFET Performance (Top/Bottom)</h3>
+            <p class="result" id="buck-mosfet-result"></p>
+          </div>
+          <div class="result-panel">
+            <h3>Power Loss Graph</h3>
+            <div class="loss-chart" id="buck-loss-chart"></div>
+            <p class="result" id="buck-loss-result"></p>
+          </div>
+          <div class="result-panel">
+            <h3>Thermal and Heatsink Selection</h3>
+            <p class="result" id="buck-thermal-result"></p>
+          </div>
+        </article>
+      </section>
+
+      <section class="dcdc-topology" id="topology-boost">
+        <article class="card dcdc-card">
+          <h2 class="calc-title">
+            <span class="calc-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 17h16"></path>
+                <path d="M12 7v10"></path>
+                <path d="M8 11l4-4 4 4"></path>
+              </svg>
+            </span>
+            Boost Converter (Step-Up)
+          </h2>
+          <p>Design for raising DC voltage with duty-cycle and current stress considered at low Vin.</p>
+          <div class="dcdc-grid">
+            <div class="form-row">
+              <label for="boost-vin-min">Vin Min (V)</label>
+              <input id="boost-vin-min" type="number" step="any" value="9">
+            </div>
+            <div class="form-row">
+              <label for="boost-vin-max">Vin Max (V)</label>
+              <input id="boost-vin-max" type="number" step="any" value="16">
+            </div>
+            <div class="form-row">
+              <label for="boost-vout">Vout (V)</label>
+              <input id="boost-vout" type="number" step="any" value="24">
+            </div>
+            <div class="form-row">
+              <label for="boost-iout">Iout (A)</label>
+              <input id="boost-iout" type="number" step="any" value="2">
+            </div>
+            <div class="form-row">
+              <label for="boost-fsw">Switching Frequency (kHz)</label>
+              <input id="boost-fsw" type="number" step="any" value="120">
+            </div>
+            <div class="form-row">
+              <label for="boost-ripple">Inductor Ripple (%)</label>
+              <input id="boost-ripple" type="number" step="any" value="35">
+            </div>
+            <div class="form-row">
+              <label for="boost-vripple">Output Ripple (%)</label>
+              <input id="boost-vripple" type="number" step="any" value="1">
+            </div>
+            <div class="form-row">
+              <label for="boost-eff">Efficiency (%)</label>
+              <input id="boost-eff" type="number" step="any" value="90">
+            </div>
+            <div class="form-row">
+              <label for="boost-ae">Core Ae (mm^2)</label>
+              <input id="boost-ae" type="number" step="any" value="110">
+            </div>
+            <div class="form-row">
+              <label for="boost-bmax">Bmax (T)</label>
+              <input id="boost-bmax" type="number" step="any" value="0.22">
+            </div>
+            <div class="form-row">
+              <label for="boost-j">Current Density J (A/mm^2)</label>
+              <input id="boost-j" type="number" step="any" value="4">
+            </div>
+            <section class="mosfet-group dcdc-span-all" aria-label="Boost top MOSFET parameters">
+              <h3>Top MOSFET Parameters (High-Side)</h3>
+              <div class="dcdc-grid dcdc-grid--nested">
+                <div class="form-row">
+                  <label for="boost-hs-rdson">Top MOSFET Rds(on) (mohm)</label>
+                  <input id="boost-hs-rdson" type="number" step="any" value="14">
+                </div>
+                <div class="form-row">
+                  <label for="boost-hs-qg">Top MOSFET Total Qg (nC)</label>
+                  <input id="boost-hs-qg" type="number" step="any" value="42">
+                </div>
+                <div class="form-row">
+                  <label for="boost-hs-trtf">Top MOSFET tr + tf (ns)</label>
+                  <input id="boost-hs-trtf" type="number" step="any" value="40">
+                </div>
+                <div class="form-row">
+                  <label for="boost-hs-vgate">Top Gate Drive Vgs (V)</label>
+                  <input id="boost-hs-vgate" type="number" step="any" value="10">
+                </div>
+              </div>
+            </section>
+            <section class="mosfet-group dcdc-span-all" aria-label="Boost bottom MOSFET parameters">
+              <h3>Bottom MOSFET Parameters (Low-Side)</h3>
+              <div class="dcdc-grid dcdc-grid--nested">
+                <div class="form-row">
+                  <label for="boost-ls-rdson">Bottom MOSFET Rds(on) (mohm)</label>
+                  <input id="boost-ls-rdson" type="number" step="any" value="18">
+                </div>
+                <div class="form-row">
+                  <label for="boost-ls-qg">Bottom MOSFET Total Qg (nC)</label>
+                  <input id="boost-ls-qg" type="number" step="any" value="32">
+                </div>
+                <div class="form-row">
+                  <label for="boost-ls-trtf">Bottom MOSFET tr + tf (ns)</label>
+                  <input id="boost-ls-trtf" type="number" step="any" value="45">
+                </div>
+                <div class="form-row">
+                  <label for="boost-ls-vgate">Bottom Gate Drive Vgs (V)</label>
+                  <input id="boost-ls-vgate" type="number" step="any" value="10">
+                </div>
+              </div>
+            </section>
+            <div class="form-row">
+              <label for="boost-ta">Ambient Temp (degC)</label>
+              <input id="boost-ta" type="number" step="any" value="40">
+            </div>
+            <div class="form-row">
+              <label for="boost-tjmax">Max Junction Temp (degC)</label>
+              <input id="boost-tjmax" type="number" step="any" value="125">
+            </div>
+            <div class="form-row">
+              <label for="boost-rthjc">RthJC (degC/W)</label>
+              <input id="boost-rthjc" type="number" step="any" value="2">
+            </div>
+            <div class="form-row">
+              <label for="boost-rthcs">RthCS (degC/W)</label>
+              <input id="boost-rthcs" type="number" step="any" value="0.5">
+            </div>
+          </div>
+          <div class="action-row">
+            <button data-action="dcdc-calc" data-topology="boost" type="button">Calculate Boost Design</button>
+            <button class="secondary-btn" data-action="dcdc-pdf" data-topology="boost" type="button">Download Boost PDF</button>
+          </div>
+          <div class="result-panel">
+            <h3>Power Component Selection</h3>
+            <p class="result" id="boost-power-result"></p>
+          </div>
+          <div class="result-panel">
+            <h3>Magnetics Selection</h3>
+            <p class="result" id="boost-mag-result"></p>
+          </div>
+          <div class="result-panel">
+            <h3>MOSFET Performance (Top/Bottom)</h3>
+            <p class="result" id="boost-mosfet-result"></p>
+          </div>
+          <div class="result-panel">
+            <h3>Power Loss Graph</h3>
+            <div class="loss-chart" id="boost-loss-chart"></div>
+            <p class="result" id="boost-loss-result"></p>
+          </div>
+          <div class="result-panel">
+            <h3>Thermal and Heatsink Selection</h3>
+            <p class="result" id="boost-thermal-result"></p>
+          </div>
+        </article>
+      </section>
+
+      <section class="dcdc-topology" id="topology-buckboost">
+        <article class="card dcdc-card">
+          <h2 class="calc-title">
+            <span class="calc-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 6h16"></path>
+                <path d="M4 18h16"></path>
+                <path d="M12 6v12"></path>
+                <path d="M8 10l4-4 4 4"></path>
+                <path d="M8 14l4 4 4-4"></path>
+              </svg>
+            </span>
+            Buck-Boost Converter
+          </h2>
+          <p>Design for wide-input regulation where output can be above or below input (inverting topology model).</p>
+          <div class="dcdc-grid">
+            <div class="form-row">
+              <label for="bb-vin-min">Vin Min (V)</label>
+              <input id="bb-vin-min" type="number" step="any" value="10">
+            </div>
+            <div class="form-row">
+              <label for="bb-vin-max">Vin Max (V)</label>
+              <input id="bb-vin-max" type="number" step="any" value="20">
+            </div>
+            <div class="form-row">
+              <label for="bb-vout">|Vout| (V)</label>
+              <input id="bb-vout" type="number" step="any" value="15">
+            </div>
+            <div class="form-row">
+              <label for="bb-iout">Iout (A)</label>
+              <input id="bb-iout" type="number" step="any" value="2">
+            </div>
+            <div class="form-row">
+              <label for="bb-fsw">Switching Frequency (kHz)</label>
+              <input id="bb-fsw" type="number" step="any" value="150">
+            </div>
+            <div class="form-row">
+              <label for="bb-ripple">Inductor Ripple (%)</label>
+              <input id="bb-ripple" type="number" step="any" value="30">
+            </div>
+            <div class="form-row">
+              <label for="bb-vripple">Output Ripple (%)</label>
+              <input id="bb-vripple" type="number" step="any" value="1">
+            </div>
+            <div class="form-row">
+              <label for="bb-eff">Efficiency (%)</label>
+              <input id="bb-eff" type="number" step="any" value="88">
+            </div>
+            <div class="form-row">
+              <label for="bb-ae">Core Ae (mm^2)</label>
+              <input id="bb-ae" type="number" step="any" value="95">
+            </div>
+            <div class="form-row">
+              <label for="bb-bmax">Bmax (T)</label>
+              <input id="bb-bmax" type="number" step="any" value="0.22">
+            </div>
+            <div class="form-row">
+              <label for="bb-j">Current Density J (A/mm^2)</label>
+              <input id="bb-j" type="number" step="any" value="4">
+            </div>
+            <section class="mosfet-group dcdc-span-all" aria-label="Buck-Boost top MOSFET parameters">
+              <h3>Top MOSFET Parameters (High-Side)</h3>
+              <div class="dcdc-grid dcdc-grid--nested">
+                <div class="form-row">
+                  <label for="bb-hs-rdson">Top MOSFET Rds(on) (mohm)</label>
+                  <input id="bb-hs-rdson" type="number" step="any" value="16">
+                </div>
+                <div class="form-row">
+                  <label for="bb-hs-qg">Top MOSFET Total Qg (nC)</label>
+                  <input id="bb-hs-qg" type="number" step="any" value="38">
+                </div>
+                <div class="form-row">
+                  <label for="bb-hs-trtf">Top MOSFET tr + tf (ns)</label>
+                  <input id="bb-hs-trtf" type="number" step="any" value="42">
+                </div>
+                <div class="form-row">
+                  <label for="bb-hs-vgate">Top Gate Drive Vgs (V)</label>
+                  <input id="bb-hs-vgate" type="number" step="any" value="10">
+                </div>
+              </div>
+            </section>
+            <section class="mosfet-group dcdc-span-all" aria-label="Buck-Boost bottom MOSFET parameters">
+              <h3>Bottom MOSFET Parameters (Low-Side)</h3>
+              <div class="dcdc-grid dcdc-grid--nested">
+                <div class="form-row">
+                  <label for="bb-ls-rdson">Bottom MOSFET Rds(on) (mohm)</label>
+                  <input id="bb-ls-rdson" type="number" step="any" value="16">
+                </div>
+                <div class="form-row">
+                  <label for="bb-ls-qg">Bottom MOSFET Total Qg (nC)</label>
+                  <input id="bb-ls-qg" type="number" step="any" value="38">
+                </div>
+                <div class="form-row">
+                  <label for="bb-ls-trtf">Bottom MOSFET tr + tf (ns)</label>
+                  <input id="bb-ls-trtf" type="number" step="any" value="42">
+                </div>
+                <div class="form-row">
+                  <label for="bb-ls-vgate">Bottom Gate Drive Vgs (V)</label>
+                  <input id="bb-ls-vgate" type="number" step="any" value="10">
+                </div>
+              </div>
+            </section>
+            <div class="form-row">
+              <label for="bb-ta">Ambient Temp (degC)</label>
+              <input id="bb-ta" type="number" step="any" value="40">
+            </div>
+            <div class="form-row">
+              <label for="bb-tjmax">Max Junction Temp (degC)</label>
+              <input id="bb-tjmax" type="number" step="any" value="125">
+            </div>
+            <div class="form-row">
+              <label for="bb-rthjc">RthJC (degC/W)</label>
+              <input id="bb-rthjc" type="number" step="any" value="2">
+            </div>
+            <div class="form-row">
+              <label for="bb-rthcs">RthCS (degC/W)</label>
+              <input id="bb-rthcs" type="number" step="any" value="0.5">
+            </div>
+          </div>
+          <div class="action-row">
+            <button data-action="dcdc-calc" data-topology="buckboost" type="button">Calculate Buck-Boost Design</button>
+            <button class="secondary-btn" data-action="dcdc-pdf" data-topology="buckboost" type="button">Download Buck-Boost PDF</button>
+          </div>
+          <div class="result-panel">
+            <h3>Power Component Selection</h3>
+            <p class="result" id="buckboost-power-result"></p>
+          </div>
+          <div class="result-panel">
+            <h3>Magnetics Selection</h3>
+            <p class="result" id="buckboost-mag-result"></p>
+          </div>
+          <div class="result-panel">
+            <h3>MOSFET Performance (Top/Bottom)</h3>
+            <p class="result" id="buckboost-mosfet-result"></p>
+          </div>
+          <div class="result-panel">
+            <h3>Power Loss Graph</h3>
+            <div class="loss-chart" id="buckboost-loss-chart"></div>
+            <p class="result" id="buckboost-loss-result"></p>
+          </div>
+          <div class="result-panel">
+            <h3>Thermal and Heatsink Selection</h3>
+            <p class="result" id="buckboost-thermal-result"></p>
+          </div>
+        </article>
+      </section>
+    </div>
+  </section>
+
+  <section class="panel" id="study-panel">
+    <section class="study-shell" id="study-materials">
+      <section class="card study-intro">
+        <h2 class="calc-title">
+          <span class="calc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 5h13a3 3 0 0 1 3 3v11H7a3 3 0 0 0-3 3z"></path>
+              <path d="M7 5v17"></path>
+              <path d="M10 9h7"></path>
+              <path d="M10 13h7"></path>
+            </svg>
+          </span>
+          Study Materials For Students And Engineers
+        </h2>
+        <p>
+          Quick revision modules for analog, power electronics, and practical design work.
+          Use these topics as a roadmap before working on hardware.
+        </p>
+      </section>
+
+      <div class="study-grid">
+        <article class="card study-card">
+          <h3>Core Electronics</h3>
+          <ul>
+            <li>Ohm's law, KCL, KVL, power and energy basics</li>
+            <li>Series and parallel resistor network reduction</li>
+            <li>Voltage divider loading effect and source impedance</li>
+            <li>Capacitor and inductor transient intuition</li>
+            <li>Thevenin and Norton equivalent circuits</li>
+            <li>Maximum power transfer principle</li>
+          </ul>
+        </article>
+        <article class="card study-card">
+          <h3>Power Design</h3>
+          <ul>
+            <li>Buck, Boost, and Buck-Boost duty-cycle relations</li>
+            <li>Inductor ripple and output capacitor ripple tradeoffs</li>
+            <li>Switch/diode stress, conduction and switching losses</li>
+            <li>Thermal path: thetaJC, thetaCS, thetaSA fundamentals</li>
+            <li>Current-mode vs voltage-mode control basics</li>
+            <li>Output transient and compensation checkpoints</li>
+          </ul>
+        </article>
+        <article class="card study-card">
+          <h3>Components And Layout</h3>
+          <ul>
+            <li>Resistor code, tolerance, and temperature coefficient</li>
+            <li>LED, transistor biasing, and zener regulator sizing</li>
+            <li>Linear regulator dissipation and heatsink checks</li>
+            <li>PCB loop minimization, grounding, and EMI awareness</li>
+            <li>Decoupling capacitor placement and return path control</li>
+            <li>Input filter and surge protection design notes</li>
+          </ul>
+        </article>
+        <article class="card study-card">
+          <h3>Analog Design Practice</h3>
+          <ul>
+            <li>Small-signal model basics for BJT and MOSFET stages</li>
+            <li>Op-amp gain, bandwidth, stability, and slew limits</li>
+            <li>Filter basics: LPF, HPF, BPF transfer interpretation</li>
+            <li>Noise sources and SNR budgeting fundamentals</li>
+          </ul>
+        </article>
+        <article class="card study-card">
+          <h3>Digital And Embedded Basics</h3>
+          <ul>
+            <li>Logic levels, fan-out, pull-up and pull-down sizing</li>
+            <li>Clocking, timing margins, setup and hold concepts</li>
+            <li>ADC/DAC interface fundamentals and reference routing</li>
+            <li>UART, I2C, SPI practical board-level guidelines</li>
+          </ul>
+        </article>
+        <article class="card study-card">
+          <h3>Magnetics And Thermal</h3>
+          <ul>
+            <li>Inductor core selection using energy and saturation limits</li>
+            <li>Turns/gap tradeoff and copper loss estimation</li>
+            <li>Thermal resistance networks and hotspot analysis</li>
+            <li>Heatsink sizing and airflow decision points</li>
+          </ul>
+        </article>
+        <article class="card study-card">
+          <h3>Lab Validation Workflow</h3>
+          <ul>
+            <li>Bring-up sequence and current-limited first power-on</li>
+            <li>Oscilloscope probing for ripple and switching nodes</li>
+            <li>Efficiency sweep across load and input variation</li>
+            <li>Temperature rise logging with repeatable conditions</li>
+          </ul>
+        </article>
+        <article class="card study-card">
+          <h3>Design Review Checklist</h3>
+          <ul>
+            <li>Validate equation units before finalizing parts</li>
+            <li>Apply 2x power margin for resistors and zeners</li>
+            <li>Cross-check worst-case Vin, load, and temperature</li>
+            <li>Record assumptions in every design report revision</li>
+            <li>Verify ratings against startup and fault conditions</li>
+            <li>Document test evidence for every critical calculation</li>
+          </ul>
+        </article>
+        <article class="card study-card study-card--wide">
+          <h3>Study Link References</h3>
+          <ul class="study-links">
+            <li><a href="https://ocw.mit.edu/courses/6-002-circuits-and-electronics-spring-2007/" target="_blank" rel="noopener noreferrer">MIT OpenCourseWare: Circuits and Electronics (6.002)</a></li>
+            <li><a href="https://www.allaboutcircuits.com/textbook/" target="_blank" rel="noopener noreferrer">All About Circuits: Lessons in Electric Circuits (Free Textbook)</a></li>
+            <li><a href="https://www.electronics-tutorials.ws/" target="_blank" rel="noopener noreferrer">Electronics-Tutorials: Analog and Digital Topic Library</a></li>
+            <li><a href="https://www.analog.com/en/resources/design-tools-and-calculators/ltspice-simulator.html" target="_blank" rel="noopener noreferrer">Analog Devices: LTspice Download and Learning Resources</a></li>
+            <li><a href="https://falstad.com/circuit/" target="_blank" rel="noopener noreferrer">Falstad: Interactive Circuit Simulator</a></li>
+            <li><a href="https://www.khanacademy.org/science/electrical-engineering" target="_blank" rel="noopener noreferrer">Khan Academy: Electrical Engineering Lessons</a></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </section>
+
+  <footer class="footer">
+    <p>Built for electronics students and engineers.</p>
+    <p>Creator: M.Senthilkumar</p>
+    <p>Copyright (c) 2026 TMSentroniX. All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
